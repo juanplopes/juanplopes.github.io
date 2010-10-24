@@ -1,0 +1,42 @@
+html {
+	height: 100%;
+}
+a 
+{
+	text-decoration: none;
+}
+
+body 
+{
+	overflow: hidden;
+	height: 100%;
+	background: black url('bg.jpg') no-repeat center;
+	background-attachment: fixed;
+}
+.content 
+{
+	left: 53%;
+	top: 40%;
+	position: fixed;
+	text-align: right;
+}
+.juanlopes 
+{
+	background: url('juanlopes.png') 306px;
+	width: 306px;
+	height: 51px;
+	display: inline-block;
+}
+
+.juanlopes:hover 
+{
+	background-position: 0px ;
+}
+
+.craftsman 
+{
+	background: url('craftsman.png');
+	width: 387px;
+	height: 46px;
+	display: inline-block;
+}
