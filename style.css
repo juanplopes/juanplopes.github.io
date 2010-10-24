@@ -18,7 +18,7 @@ body
 {
 	overflow: hidden;
 	height: 100%;
-	background: black url('bg.jpg') no-repeat center;
+	background: #333 url('bg.jpg') no-repeat center;
 	background-attachment: fixed;
 }
 
