@@ -4,6 +4,14 @@ html {
 a 
 {
 	text-decoration: none;
+	border: none;
+}
+
+a:hover {
+	border: none;
+}
+a:active {
+	border: none;
 }
 
 body 
@@ -17,20 +25,24 @@ body
 hr
 {
 	border-color: white;
+	clear: both;
 }
 .content 
 {
 	left: 53%;
 	top: 40%;
 	position: fixed;
-	text-align: right;
+	width: 387px;
 }
 .juanlopes 
 {
 	background: url('juanlopes.png') 306px;
 	width: 306px;
 	height: 51px;
-	display: inline-block;
+	display: block;
+	overflow: hidden;
+	text-indent: -9999px;
+	float: right;
 }
 
 .juanlopes:hover 
@@ -43,7 +55,10 @@ hr
 	background: url('craftsman.png');
 	width: 387px;
 	height: 46px;
-	display: inline-block;
+	display: block;
+	overflow: hidden;
+	text-indent: -9999px;
+	float: right;
 }
 
 .icons 
@@ -54,7 +69,8 @@ hr
 .icons *
 {
 	text-indent: 9999px;
-	display: block;
+	display: inline;
+	overflow: hidden;
 	float: left;
 	width: 64px;
 	height: 56px;
