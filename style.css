@@ -13,6 +13,11 @@ body
 	background: black url('bg.jpg') no-repeat center;
 	background-attachment: fixed;
 }
+
+hr
+{
+	border-color: white;
+}
 .content 
 {
 	left: 53%;
@@ -40,3 +45,34 @@ body
 	height: 46px;
 	display: inline-block;
 }
+
+.icons 
+{
+	float: right;
+}
+
+.icons *
+{
+	text-indent: 9999px;
+	display: block;
+	float: left;
+	width: 64px;
+	height: 56px;
+	 background: url('social.png') no-repeat;
+}
+
+.github { background-position: 0px 0px; }
+.github:hover { background-position: -63px 0px; }
+
+.facebook { background-position: 0px -56px; }
+.facebook:hover { background-position: -63px -56px; }
+
+.twitter { background-position: 0px -112px; }
+.twitter:hover { background-position: -63px -112px; }
+
+.google { background-position: 0px -168px; }
+.google:hover { background-position: -63px -168px; }
+
+.linkedin { background-position: 0px -224px; }
+.linkedin:hover { background-position: -63px -224px; }
+
