@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <style type="text/css">
+            div.uvastats {
+                background-image: url(uva.png);
+                width: 200px;
+                height: 60px;
+            }
+            
+            div.uvastats div.stats {
+                text-shadow: 0 0 4px #fff;
+                -moz-text-shadow: 0 0 4px #fff;
+                -webkit-text-shadow: 0 0 4px #fff;
+                color: white;
+                font-family: Verdana;
+                padding-top: 10px;
+                padding-right: 10px;
+                text-align: right;
+            }
+            
+            div.uvastats div.username  {
+                font-weight: bold;
+                font-size: 11pt;
+            }
+            
+            div.uvastats div.accepted  {
+                font-size: 10pt;
+            }
+            
+            div.uvastats span.problems {
+                font-weight: bold;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="uvastats">
+            <div class="stats username">no bot</div>
+            <div class="stats accepted"><span class="problems">no bot</span> accepted</div>
+        </div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+
+    <script>
+        $(function() {
+            $.ajax('http://uhunt.felix-halim.net/api/ranklist/3586/0/0', {
+                success: function(data) {
+                    $('.username').text(data[0].username);
+                    $('.problems').text(data[0].ac);
+                }
+            });
+        });
+    </script>
+    
+</html>
