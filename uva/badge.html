@@ -47,9 +47,14 @@
     <script>
         $(function() {
             $.ajax('http://uhunt.felix-halim.net/api/ranklist/3586/0/0', {
+                dataType: 'jsonp',
                 success: function(data) {
                     $('.username').text(data[0].username);
                     $('.problems').text(data[0].ac);
+                },
+                error: function(data) {
+                    $('.username').text('ERROR');
+                    $('.accepted').text('Are you using IE?');
                 }
             });
         });
