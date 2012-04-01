@@ -1,0 +1,47 @@
+body { 
+    font-family: 'Quicksand', sans-serif; 
+    width: 1000px; 
+    margin: auto;
+    color: #666;
+}
+
+h1, h2 {
+    letter-spacing:0.15em;
+    font-weight: normal;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+
+iframe.uva-badge { 
+    border: 0px; 
+    width: 200px; 
+    height: 60px; 
+}
+
+a {
+    color: #007;
+}
+
+a:hover {
+    color: #FFF;
+    background-color: #007;
+    font-weight: bold;
+}
+
+a:active {
+    color: #00F;
+    background-color: transparent;
+}
+
+a.nounderline, a img { 
+    text-decoration: none; 
+    background-color: transparent;
+    border: none;
+}
