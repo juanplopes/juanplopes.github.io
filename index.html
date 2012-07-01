@@ -4,7 +4,6 @@
         <title>Juan Lopes - programmer MF</title>
         <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
         <link href='main.css' rel='stylesheet' type='text/css'>
-        <link href='iconic/iconic_fill.css' rel='stylesheet' type='text/css'>
     </head>
     
     <body>
@@ -30,8 +29,11 @@
                 <a class="nounderline" href="http://github.com/juanplopes/euler">
                     <img src="http://projecteuler.net/profile/juanplopes.png" alt="Project Euler"/></a>
                 
-                <iframe class="uva-badge" src="uva/badge.html" scrolling="no" marginwidth="0px" marginheight="0px"></iframe>
-            </p>
+                 <a class="uvastats" href="http://github.com/juanplopes/valladolid">
+                            <span class="stats username">no bot</span>
+                            <span class="stats accepted"><span class="problems">no bot</span> accepted</span>
+                 </a>            
+        </p>
         </p>
       
         <h2>Community</h2>
@@ -89,6 +91,21 @@
             (function() {
                 document.getElementById('email').innerHTML = "me" + "@@@@"[0] + "juanlopes.net"
             })();
+        </script>
+        <script>
+            $(function() {
+                $.ajax('http://uhunt.felix-halim.net/api/ranklist/3586/0/0', {
+                    success: function(data) {
+                        data = eval(data);
+                        $('.username').text(data[0].username);
+                        $('.problems').text(data[0].ac);
+                    },
+                    error: function(data) {
+                        $('.username').text('error');
+                        $('.accepted').text('are you using IE?');
+                    }
+                });
+            });
         </script>
     </body>
 </html>

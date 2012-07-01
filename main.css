@@ -45,3 +45,40 @@ a.nounderline, a img {
     background-color: transparent;
     border: none;
 }
+
+a.uvastats {
+    background-image: url(uva.png);
+    width: 200px;
+    height: 60px;
+    display: inline-table;
+    text-decoration: none;
+}
+
+a.uvastats:hover {
+    font-weight: normal;
+}
+
+a.uvastats span.stats {
+    text-shadow: 0 0 4px #fff;
+    -moz-text-shadow: 0 0 4px #fff;
+    -webkit-text-shadow: 0 0 4px #fff;
+    color: white;
+    font-family: 'Verdana', sans-serif; 
+    padding-top: 10px;
+    padding-right: 10px;
+    text-align: right;
+    display: block;
+}
+
+a.uvastats span.username  {
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+a.uvastats span.accepted  {
+    font-size: 10pt;
+}
+
+a.uvastats span.problems {
+    font-weight: bold;
+}
