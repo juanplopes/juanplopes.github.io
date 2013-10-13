@@ -17,7 +17,12 @@ a.badge {
     height: 60px;
     display: inline-block;
     text-decoration: none;
-    vertical-align:middle
+    vertical-align:middle;
+    border: 2px solid white;
+}
+
+a.badge:hover {
+    border: 2px solid #007;
 }
 
 .clear {
@@ -36,12 +41,6 @@ a:hover {
 a:active {
     color: #00F;
     background-color: transparent;
-}
-
-a.nounderline, a img { 
-    text-decoration: none; 
-    background-color: transparent;
-    border: none;
 }
 
 a.uvastats {
