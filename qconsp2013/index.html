@@ -21,16 +21,11 @@ URL: https://code.google.com/p/io-2012-slides
   <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
   <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
   <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
-  <style>
-      aside.note { display:none !important; }
-      slide { -webkit-print-color-adjust:exact; }
-      slide img.old-svg { max-width: 80%; max-height: 60%; }
-  </style>
   <script type="text/javascript">
   window.onload = function () {
       var script = document.createElement("script");
       script.type = "text/javascript";
-      script.src  = "../mathjax/MathJax.js";
+      script.src  = "js/mathjax/MathJax.js";
 
       var config = 'MathJax.Hub.Config({' +
                    '  extensions: ["tex2jax.js"],'+
@@ -48,6 +43,21 @@ URL: https://code.google.com/p/io-2012-slides
 <body style="opacity: 0">
 
 <slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter" style="text-align:center">
+      <span><img src="images/qcon.png"></span>
+      <br>
+      <span>
+        <span>Presenter:</span>
+        <a href="?presentme=true" target="_self">ON</a> | 
+        <a href="?presentme=false" target="_self">OFF</a>
+      </span>
+      
+      <p style="margin-top:50px"><a href="http://juanlopes.net/qconsp2013">juanlopes.net/qconsp2013</a></p>
+    </article>
+  </slide>
+
   <slide class="title-slide segue nobackground">
    <aside class="note">
       <section>
@@ -88,7 +98,7 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article>
       <div class="centered">
-        <img src="svg/cep.svg.png.png" class="old-svg" />
+        <object data="svg/cep.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -194,7 +204,7 @@ having sum(a.price + b.price) > 100
     </hgroup>
     <article>
       <div class="centered">
-        <img src="svg/logs.svg.png.png" class="old-svg" />
+        <object data="svg/logs.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -255,7 +265,7 @@ select avg(price) from StockTick(symbol='IBM')<b>.win:time(1 min)</b>
       </pre>
       
       <div class="centered">
-        <img src="svg/win_time_1min.svg.png.png" class="old-svg" />
+        <object data="svg/win_time_1min.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -281,7 +291,7 @@ select avg(price) from StockTick(symbol='IBM')<b>.win:time(1 hour)</b>
       </pre>
       
       <div class="centered">
-        <img src="svg/win_time_1hour.svg.png.png" class="old-svg" />
+        <object data="svg/win_time_1hour.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -337,7 +347,7 @@ StockTick symbol:IBM => price#avg every minute
     </hgroup>
     <article>
       <div class="centered">
-        <img src="svg/partition1.svg.png.png" class="old-svg" />
+        <object data="svg/partition1.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -358,7 +368,7 @@ StockTick symbol:IBM => price#avg every minute
     </hgroup>
     <article>
       <div class="centered">
-        <img src="svg/partition2.svg.png.png" class="old-svg" />
+        <object data="svg/partition2.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -438,7 +448,7 @@ StockTick symbol:IBM => 42 * price#avg * price#stdev every hour
       </pre>
       
       <div class="centered">
-        <img src="svg/mergeable.svg.png.png" class="old-svg" />
+        <object data="svg/mergeable.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -465,7 +475,7 @@ PageViews page:home => user_id:dcount every hour
       </pre>
       
       <div class="centered">
-        <img src="svg/dcount_mergeable.svg.png.png" class="old-svg" />
+        <object data="svg/dcount_mergeable.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -487,7 +497,7 @@ PageViews page:home => user_id:dcount every hour
     </hgroup>
     <article class="build">
       <div class="centered">
-        <img src="svg/dcount_partition.svg.png.png" class="old-svg" />
+        <object data="svg/dcount_partition.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -560,7 +570,7 @@ PageViews page:home => user_id:dcount every hour
     </hgroup>
     <article>
       <div class="centered">
-        <img src="svg/sets.svg.png.png" class="old-svg" />
+        <object data="svg/sets.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -654,7 +664,7 @@ PageViews page:home => user_id:dcount every hour
     </hgroup>
     <article>
       <div class="centered">
-        <img src="svg/bloom_filters.svg.png.png" class="old-svg" />
+        <object data="svg/bloom_filters.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -722,7 +732,7 @@ PageViews page:home => user_id:dcount every hour
       \end{equation*}
       </div>
       <div>
-      <img src="svg/bloom_graph.svg.png.png" />
+      <object data="svg/bloom_graph.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -792,7 +802,7 @@ PageViews page:home => user_id:dcount every hour
     </hgroup>
     <article>
       <div class="centered">
-        <img src="svg/countmin.svg.png.png" class="old-svg" />
+        <object data="svg/countmin.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -952,7 +962,7 @@ class CountMin:
     </hgroup>
     <article>
       <div class="centered">
-        <img src="svg/hll_perc.svg.png.png" class="old-svg" />
+        <object data="svg/hll_perc.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -975,7 +985,7 @@ class CountMin:
     </hgroup>
     <article>
       <div class="centered">
-        <img src="svg/hll_frac.svg.png.png" class="old-svg" />
+        <object data="svg/hll_frac.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -999,7 +1009,7 @@ class CountMin:
       <p>Escolhe-se $log_2 m$ bits do espaço de hash para corresponderem a $m$ subfluxos ($|M| = m$). A busca pelo prefixo é efetuada nos bits restantes.</p>
       <p>Por exemplo, para $log_2 m = 3$ ($m = 8$):</p>
       <div class="centered">
-        <img src="svg/hll_input.svg.png.png" class="old-svg" />
+        <object data="svg/hll_input.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -1020,7 +1030,7 @@ class CountMin:
     </hgroup>
     <article>
       <div class="centered">
-        <img src="svg/hll_update.svg.png.png" class="old-svg" />
+        <object data="svg/hll_update.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
@@ -1043,7 +1053,7 @@ class CountMin:
     </hgroup>
     <article>
       <div class="centered">
-        <img src="svg/hll_update2.svg.png.png" class="old-svg" />
+        <object data="svg/hll_update2.svg" type="image/svg+xml"></object>
       </div>
     </article>
   </slide>
