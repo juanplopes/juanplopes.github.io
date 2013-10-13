@@ -1,0 +1,1212 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+  <style>
+      aside.note { display:none !important; }
+      slide { -webkit-print-color-adjust:exact; }
+      slide img.old-svg { max-width: 80%; max-height: 60%; }
+  </style>
+  <script type="text/javascript">
+  window.onload = function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "../mathjax/MathJax.js";
+
+      var config = 'MathJax.Hub.Config({' +
+                   '  extensions: ["tex2jax.js"],'+
+                   '  jax: ["input/TeX","output/HTML-CSS"],'+
+                   '  tex2jax: {inlineMath: [["$","$"]]}'+
+                   '});';
+
+      if (window.opera) {script.innerHTML = config}
+                   else {script.text = config}
+
+      document.getElementsByTagName("head")[0].appendChild(script);
+  };
+  </script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+  <slide class="title-slide segue nobackground">
+   <aside class="note">
+      <section>
+        <ul>
+          <li>Juan Lopes</li>
+          <li>Trabalho na Intelie</li>
+          <li>Alexandre Porcelli, Eder Ignatowicz</li>
+          <li>Cientista da computação</li>
+          <li>Duas partes: experiência / ciência</li>
+        </ul>
+      </section>
+    </aside>
+  
+    <aside class="gdbar"><img src="images/intelie_128.png"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+  <aside class="note">
+      <section>
+        <ul>
+          <li>Intelie monitoração de infra de TI</li>
+          <li>Ambiente heterogêneo</li>
+          <li>Eventos por todo lado</li>
+          <li>Correlação de eventos (Compras vs erros HTTP)</li>
+          <li>Essencialmente tempo real</li>
+        </ul>
+      </section>
+    </aside>
+     <hgroup>
+      <h2>Complex Event Processing (CEP)</h2>
+      <h3>Para monitoração da infra de TI</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="svg/cep.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>PERGUNTAR: Quem conhece o Esper?</li>
+          <li>Componente JAVA para CEP</li>
+          <li>Também tem uma versão .NET</li>
+        </ul>
+      </section>
+    </aside>
+ 
+    <hgroup>
+      <h2>Esper</h2>
+      <h3>Componente de CEP open-source (GPL v2)</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="images/esper.png" alt="Esper website" />
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Linguagem parecida com SQL</li>
+          <li>Índice está na consulta, não nos dados</li>
+          <li>Segue: primitivas para lidar com o tempo</li>
+          <li>Segue: primitivas para lidar com a ordem dos eventos</li>
+        </ul>
+      </section>
+    </aside>
+ 
+    <hgroup>
+      <h2>Que linguagem é essa?</h2>
+      <h3>Claro que é uma pegadinha.</h3>
+    </hgroup>
+    <article class="build">
+      <pre class="prettyprint" data-lang="SQL?">
+select * from StockTick
+      </pre>
+      
+      <pre class="prettyprint" data-lang="HEIN?">
+select * from StockTick(symbol='IBM')<b>.win:time(30 sec)</b>
+      </pre>
+      
+      <pre class="prettyprint" data-lang="EPL!">
+select a.custId, sum(a.price + b.price)
+from <b>pattern [every a=ServiceOrder -> 
+    b=ProductOrder(custId = a.custId) where timer:within(1 min)].win:time(2 hour)</b>
+where a.name in ('Repair', b.name)
+group by a.custId
+having sum(a.price + b.price) > 100
+      </pre>
+    </article>
+  </slide>
+
+  <slide class="segue dark quote nobackground">
+    <aside class="note dark">
+      <section>
+        <ul>
+          <li>Em tempo real, não medimos em bytes, e sim em bytes por segundo</li>
+          <li>Latência também é importante</li>
+          <li>Não há preprocessamento nos dados</li>
+          <li>Há préprocessamento nas computações</li>
+          <li>Lucene full-text, motor de autômatos finitos</li>
+        </ul>
+      </section>
+    </aside>
+     <aside class="gdbar right bottom"><img src="images/intelie_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <q>
+        [...] we’re measuring data less in terms of scale and more in terms of bandwidth.
+      </q>
+      <div class="author">
+        Mike Barlow - O'Reilly <br>
+        <a href="http://cdn.oreillystatic.com/oreilly/radarreport/0636920029441/Real_Time_Big_Data_Analytics_Emerging_Architecture.pdf">Real Time Big Data Analytics: Emerging Architecture</a>
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Globo.com pediu</li>
+          <li>Estimativa de 3TB por dia</li>
+          <li>Ainda não chegou nisso, mas está em 1TB</li>
+          <li>Sem computação distribuída, não dá</li>
+          <li>E como integrar isso com CEP?</li>
+        </ul>
+      </section>
+    </aside>
+ 
+    <hgroup>
+      <h2>Arquitetura para indexação de Logs</h2>
+      <h3>Em produção há cerca de um ano e meio</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="svg/logs.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Projeto tem dois anos</li>
+          <li>Em produção há um ano e meio</li>
+          <li>máquinas, full-text, real-time, 20K (7mb), 80K (30mb)</li>
+          <li>Palestrei sobre isso ano passado, mudou muito desde então.</li>
+          <li>Principalmente: evolução das agregações em tempo real, falaremos aqui</li>
+        </ul>
+      </section>
+    </aside>
+ 
+    <hgroup>
+      <h2>Alguns números de produção</h2>
+      <h3>De Julho de 2013</h3>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>4 máquinas físicas no cluster</li>
+        <li>Buscas full-text num dataset de 15TB</li>
+        <li>Cerca de 60 computações contínuas sobre o fluxo em tempo real</li>
+        <li>Média de 20.000 mensagens/segundo (~7 MB/s)</li>
+        <li>Máximas de até 80.000 mensagens/segundo em grandes eventos (~30 MB/s)
+            <ul>
+                <li>Ao longo de várias horas</li>
+                <li>Exemplo: chegada do Papa no Brasil; final do BBB; jogo do Brasil</li>
+            </ul>
+        </li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Correlacionar eventos, precisam estar em memória</li>
+          <li>Janela de eventos</li>
+          <li>Torna o processo muito rápido</li>
+          <li>Mas...</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Janela de Eventos</h2>
+      <h3>Janelas são mantidas em memória</h3>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="EPL">
+select avg(price) from StockTick(symbol='IBM')<b>.win:time(1 min)</b>
+      </pre>
+      
+      <div class="centered">
+        <img src="svg/win_time_1min.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Janelas muito longas consomem memória</li>
+          <li>Agregações simples requerem soluções complexas (média de janela)</li>
+          <li>A linguagem não ajuda</li>
+          <li>Precisávamos fazer algo</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Janela de Eventos</h2>
+      <h3>Pode ser ruim com janelas muito longas</h3>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="EPL">
+select avg(price) from StockTick(symbol='IBM')<b>.win:time(1 hour)</b>
+      </pre>
+      
+      <div class="centered">
+        <img src="svg/win_time_1hour.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Grandes fluxos. MÉDIA de 2 milhões de eventos / s</li>
+          <li>Ser tolerante a partição é essencial</li>
+          <li>Recursos limitados</li>
+          <li>SQL, C++ tem associatividades à direita</li>
+          <li>Pudesse ser escrita em uma linha</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Intelie Pipes</h2>
+      <h3>Linguagem para agregações em tempo real</h3>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Agregações sobre grandes fluxos;</li>
+        <li>Tolerante a partição;</li>
+        <li>O(n) time e O(1) space;</li>
+        <li>Associativa à esquerda (onde importa);</li>
+        <li>One-liners!!!11</li>
+        <li>
+           <pre class="prettyprint lang-ppl" data-lang="PPL">
+StockTick symbol:IBM => price#avg every minute
+           </pre>
+        </li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Cada nó precisa calcular o máximo possível (localidade de referência)</li>
+          <li>Comunicar o mínimo possível</li>
+          <li>Trivial para alguns casos (soma, por exemplo)</li>
+          <li>Um pouco difícil para outros casos</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Tolerância a partição</h2>
+      <h3>Eu sei que vocês sabem, mas deixa o slide aí</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="svg/partition1.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Por exemplo, média, como faz?</li>
+          <li>Mandar uma informação a mais (número de elementos, soma dos pesos)</li>
+          <li>Para outros pode ser um pouco mais complexo ainda</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Tolerância a partição</h2>
+      <h3>Eu sei que vocês sabem, mas deixa o slide aí</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="svg/partition2.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Desvio padrão</li>
+          <li>Mesma ideia da média, mas precisa de mais informações</li>
+          <li>Calma, matemática. Algoritmo paralelo para desvio padrão.</li>
+          <li>Numericamente estável, lembre-se que o fluxo é infinito.</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Agregações distribuídas</h2>
+      <h3>Mesmo casos simples precisam de cuidado</h3>
+    </hgroup>
+    <article class="build">
+      <pre class="prettyprint lang-ppl" data-lang="PPL">
+StockTick symbol:IBM => price#stdev every hour
+      </pre>
+      
+      <table style="border-bottom: 0">
+        <tr>
+          <td style="color:black">
+            \begin{equation*}
+            \bar x_n = \bar x_{n-1} + \frac{x_n - \bar x_{n-1}}{n}
+            \end{equation*}
+            \begin{equation*}
+            M_{2,n}\! =\sum_{i=1}^n (x_i - \bar x_n)^2
+            \end{equation*}
+            \begin{equation*}
+            M_{2,n}\! = M_{2,n-1} + (x_n - \bar x_{n-1})(x_n - \bar x_n)
+            \end{equation*}
+            \begin{equation*}
+            \sigma_n = \frac{M_{2,n}}{n}
+            \end{equation*}
+          </td>
+          <td style="color:black">
+            \begin{equation*}
+            \delta\! = \bar x_B - \bar x_A
+            \end{equation*}
+            \begin{equation*}
+            \bar x_X = \bar x_A + \delta\cdot\frac{n_B}{n_X}
+            \end{equation*}
+            \begin{equation*}
+            M_{2,X} = M_{2,A} + M_{2,B} + \delta^2\cdot\frac{n_A n_B}{n_X}
+            \end{equation*}
+          </td>
+        </tr>
+      </table>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Então, o que é transmitido?</li>
+          <li>NOVAMENTE: Comunicar o mínimo possível</li>
+          <li>Se por acaso eu quiser operar sobre agregações</li>
+          <li>Constantes não precisam de estado</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Agregações distribuídas</h2>
+      <h3>Mas afinal, o que é transmitido entre os nós?</h3>
+    </hgroup>
+    <article class="build">
+      <pre class="prettyprint lang-ppl" data-lang="PPL">
+StockTick symbol:IBM => 42 * price#avg * price#stdev every hour
+      </pre>
+      
+      <div class="centered">
+        <img src="svg/mergeable.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Apresentando para o time de operações da Intelie</li>
+          <li>E como agregar usuários únicos?</li>
+          <li>Moleza, estou craque em escrever agregações distribuídas</li>
+          <li>Em algumas, o problema é mais embaixo</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Contar usuários únicos por hora</h2>
+      <h3>Moleza, só que não</h3>
+    </hgroup>
+    <article class="build">
+      <pre class="prettyprint lang-ppl" data-lang="PPL">
+PageViews page:home => user_id:dcount every hour 
+      </pre>
+      
+      <div class="centered">
+        <img src="svg/dcount_mergeable.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Muito estado exige muita comunicação</li>
+          <li>Isso não era aceitável</li>
+          <li>Por isso, o motivo desta apresentação</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Contar usuários distintos por hora</h2>
+      <h3>E o custo de comunicação dos resultados?</h3>
+    </hgroup>
+    <article class="build">
+      <div class="centered">
+        <img src="svg/dcount_partition.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Estruturas de dados</li>
+          <li>Diferentes</li>
+          <li>Três, duas delas criadas a menos de 10 anos</li>
+          <li>Mas o que há de diferente?</li>
+        </ul>
+      </section>
+    </aside>
+
+    <aside class="gdbar"><img src="images/intelie_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Sketching data structures</h2>
+      <h3>Porque o universo é probabilístico<br>(exceto para quem discorda da Interpretação de Copenhagen)</h3>
+    </hgroup>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Algumas situações específicas, características de streaming</li>
+          <li>Poucos recursos</li>
+          <li>Abrir mão do determinismo para utilizar menos recursos</li>
+          <li>Um conceito antigo, mas com roupagem nova, baseado na álgebra</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Sketching data structures</h2>
+      <h3>Se você pode lidar com um pouco de imprecisão, por que não?</h3>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>
+          Apenas uma iteração sobre os dados
+          <ul>
+            <li>Úteis para streams (sem acesso aleatório).</li>
+          </ul>
+        </li>
+        <li>Conhecidos como streaming algorithms</li>
+        <li>Espaço e tempo limitados</li>
+        <li>Determinismo vs Recursos</li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Curioso como ensinamos álgebra abstrata para crianças</li>
+          <li>Mas é bom, porque todos entendem o que é um conjunto</li>
+          <li>Estas estruturas estão sentadas em conjuntos</li>
+          <li>Conceitos antigos, estruturas novas</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Conjuntos</h2>
+      <h3>Álgebra: ensinamos isso para crianças de sete anos</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="svg/sets.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>HyperLogLog, Flajolet, INRIA, Cardinalidade, 2007. Menos de 6 anos.</li>
+          <li>Count-Min Sketch, Cormode, 2003.</li>
+          <li>Mais antiga, Bloom Filters, Bloom, 1970.</li>
+          <li>PERGUNTA: quem sabe o que são filtros de Bloom?</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Sketching e conjuntos</h2>
+      <h3>Uma área com muitas contribuições recentes.</h3>
+    </hgroup>
+    <article class="build">
+
+      <div>
+        <hr/>
+        <img src="images/flajolet.jpeg" style="float: left; width: 100px; height: 100px; margin-right: 20px; border: 5px solid gray"/>
+        <p>Set cardinality</p>
+        <p><b>HyperLogLog</b><br>
+        Philippe Flajolet (2007)</p>
+      </div>
+
+      <div>
+        <hr/>
+        <img src="images/cormode.jpg" style="float: left; width: 100px; height: 100px; margin-right: 20px; border: 5px solid gray"/>
+        <p>Multiset sumarization</p>
+        <p><b>Count-Min Sketch</b><br>
+        Graham Cormode (2003)</p>
+      </div>
+
+      <div>
+        <hr/>
+        <img src="images/pokemon.png" style="float: left; width: 100px; height: 100px; margin-right: 20px; border: 5px solid gray"/>
+        <p>Set membership</p>
+        <p><b>Bloom Filters</b><br>
+        Burton Bloom (1970)</p>
+      </div>
+
+    </article>
+  </slide>
+
+  <slide class="segue dark quote nobackground">
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Hashes tem algumas propriedades</li>
+          <li>Independente do viés dos dados, ser uniforme</li>
+          <li>Criptográfico vs não criptográfico</li>
+          <li>MurMurHash</li>
+        </ul>
+      </section>
+    </aside>
+
+    <aside class="gdbar right bottom"><img src="images/intelie_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <q>
+        It is theoretically impossible to define a hash function that
+ creates random data from non-random data. But in practice it is not difficult to produce a pretty good imitation.
+      </q>
+      <div class="author">
+        Donald Knuth
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Hashsets são um array</li>
+          <li>Função de hash aponta para uma posição do array</li>
+          <li>Set membership. Bloom em vez de armazenar o item, somente diz sim ou não</li>
+          <li>Colisão é a parte probabilística (erro calculável)</li>
+          <li>Múltiplas funções de hash, diminuem o erro, mas até um certo ponto</li>
+          <li>Funções de hash independentes par-a-par.</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Bloom Filters</h2>
+      <h3>São tipo HashSets, só que não.</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="svg/bloom_filters.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Hashes são uniformemente distribuídos</li>
+          <li>Calcular a probabilidade de ter colisão</li>
+          <li>Um pouco mais de matemáticas</li>
+          <li>Cada item k funções de hash, n itens, k*n bits setados</li>
+          <li>Wikipedia, Inverso</li>
+          <li>k funções de hash</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Bloom Filters</h2>
+      <h3>Probabilidade de falso positivo.<br>Para $n$ elementos no conjunto, $k$ funções de hash e $m$ bits:</h3>
+    </hgroup>
+    <article class="build fade centered" style="font-size: 14pt">
+      <div>
+      <span>Probabilidade de não-colisão após $n$ inserções com $k$ funções de hash:</span>
+      \begin{equation*}
+      \left(1-\frac{1}{m}\right)^{kn}
+      \end{equation*}
+      </div>
+      <div>
+      <span>Invertendo, probabilidade de colisão por função de hash:</span>
+      \begin{equation*}
+      1-\left(1-\frac{1}{m}\right)^{kn}
+      \end{equation*}
+      </div>
+      <div>
+      <span>Para $k$ funções de hash:</span>
+      \begin{equation*}
+      \left(1-\left[1-\frac{1}{m}\right]^{kn}\right)^k
+      \end{equation*}
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Possivel calcular quantos bits são necessários para atingir probabilidade de erro.</li>
+          <li>Tamanho necessário cresce linearmente com a entrada</li>
+          <li>100 mil itens a 0.1% de erro exige 180kB</li>
+          <li>100 mil itens a 1% de erro exige 130kB</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Bloom Filters</h2>
+      <h3>Quantos bytes para inserir $n$ itens?</h3>
+    </hgroup>
+    <article class="centered" style="font-size: 14pt">
+      <div>
+      \begin{equation*}
+      m=-\frac{n\ln p}{(\ln 2)^2}
+      \end{equation*}
+      </div>
+      <div>
+      <img src="svg/bloom_graph.svg.png.png" />
+      </div>
+    </article>
+  </slide>
+
+  <slide class="segue dark quote nobackground">
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Gavin Andresen Bitcoin Foundation.</li>
+          <li>Usa Bloom para determinar quais transações são importantes</li>
+          <li>O nó cliente envia um filtro de bloom que sabe decidir se a transação é importante</li>
+          <li>Os outros nós filtram as transações</li>
+          <li>Falsos positivos não causam problemas</li>
+        </ul>
+      </section>
+    </aside>
+
+    <aside class="gdbar right bottom"><img src="images/intelie_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <q>
+        Downloading a few gigabytes of data before you can start using Bitcoin is not a good first user experience. (...) added support for <b>bloom filters</b> to get just the transactions relevant to your wallet.
+      </q>
+      <div class="author">
+        Gavin Andresen - BitCoin Foundation<br>
+        <a href="https://bitcoinfoundation.org/blog/?p=16">https://bitcoinfoundation.org/blog/?p=16</a>
+      </div>
+    </article>
+  </slide>
+  
+  <slide class="segue dark quote nobackground">
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Bigtable, paper, google.</li>
+          <li>Uso clássico, bloom filter pequeno em memória para diminuir lookups negativos. SSTables.</li>
+          <li>Custo do falso positivo é fazer o I/O que já aconteceria sem o filter.</li>
+        </ul>
+      </section>
+    </aside>
+    <aside class="gdbar right bottom"><img src="images/intelie_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <q>a small amount of tablet server memory used for storing Bloom Filters drastically reduces the number of disk seeks required for read operations.
+      </q>
+      <div class="author">
+        Fay Chang - Google<br>
+        <a href="http://static.googleusercontent.com/external_content/untrusted_dlcp/research.google.com/pt-BR//archive/bigtable-osdi06.pdf">Bigtable: A Distributed Storage System for Structured Data</a>
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Mesmo princípio do filtro de Bloom. Mas calcula os quantis. Ocorrência de um elemento em multiset.</li>
+          <li>Usa vários arrays para evitar colisão entre as funções de hash.</li>
+          <li>Custo de memória sublinear.</li>
+          <li>Na prática, funciona como um array probabilístico.</li>
+          <li>Erro também bem definido.</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Count-Min Sketch</h2>
+      <h3>É tipo um Bloom filter, só que não.</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="svg/countmin.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Erro depende somente do tamanho da estrutura.</li>
+          <li>Largura (w) é a quantidade de células, profundidade (d) é a quantidade de funções de hash.</li>
+          <li>Point query é o quantil de um elemento num multiset.</li>
+          <li>Ou o valor do array numa determinada posição.</li>
+          <li>O lado esquerdo é determinístico, o lado direito é probabilístico.</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Count-Min Sketch</h2>
+      <h3>Calculando o erro.</h3>
+    </hgroup>
+    <article class="build">
+      <div>
+        <p>Define-se largura ($w$) e profundidade ($d$), de forma que:</p>
+        <p class="centered">$w = \lceil e/\epsilon \rceil$ e $d = \lceil \ln{1/\delta} \rceil$.</p>
+      </div>      
+      <div>
+        <p>Assim, é possível responder point queries ($\hat{a}_i$) onde:</p>
+        <p class="centered">$a_i \leq \hat{a}_i \leq \epsilon \|a\|$<p>
+        <p>O lado direito da inequação se mantém com probabilidade $1 - \delta$.</p>
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Count-Min tem outros usos, produto escalar aproximado, multiplicação de matrizes.</li>
+          <li>Range Sum Query. Deterministicamente resolvido por Fenwick Trees.</li>
+          <li>Considerar Count-Min como array permite implementar o mesmo algoritmo com resultado probabilístico.</li>
+          <li>O artigo original recomenda usar log(n) estruturas.</li>
+          <li>Possível implementar com apenas uma, com acréscimo no erro.</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Count-Min Sketch</h2>
+      <h3>Range queries.</h3>
+    </hgroup>
+    <article class="build">
+      <p>Consiste em estimar $\sum_{i = l}^{r} a_i$.</p>
+
+      <div>
+        <p>O truque é tratar a estrutura como uma Fenwick Tree sobre um array probabilistico.</p> 
+        
+        <div class="centered">
+          <img src="images/fenwick.png" width="50%" height="50%"/>
+        </div>
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>15 linhas em Python.</li>
+          <li>A teoria é complicada, mas a implementação geralmente é simples.</li>
+          <li>Leve em consideração que é uma implementação didática.</li>
+        </ul>
+      </section>
+    </aside>
+
+    <hgroup>
+      <h2>Count-Min Sketch</h2>
+      <h3>Uma versão didática (em Python)</h3>
+    </hgroup>
+    <article class="smaller">
+<pre class="prettyprint" data-lang="python">
+class CountMin:
+    def __init__(self, m, k):
+        self.data = [[0] * m for i in range(k)]
+        self.m = m
+        self.k = k
+        
+    def add(self, element, count=1):
+        for i in range(self.k):
+            h = mmh3.hash(element, i) 
+            self.data[i][h % self.m] += count
+
+    def quantile(self, element):
+        m = 1<<30
+        for i in range(self.k):
+            h = mmh3.hash(element, i) 
+            m = min(m, self.data[i][h % self.m])
+        return m
+</pre>
+    </article>
+  </slide>
+
+  <slide class="segue dark quote nobackground">
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Reforçar: O mais difícil é provar o erro destas estruturas.</li>
+        </ul>
+      </section>
+    </aside>
+    <aside class="gdbar right bottom"><img src="images/intelie_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <q>The math establishing error bounds or other properties can be somewhat hairy, but the structures themselves are not too complicated.
+      </q>
+      <div class="author">
+        Joseph Kibe - Shareaholic<br>
+        <a href="https://tech.shareaholic.com/2012/12/03/the-count-min-sketch-how-to-count-over-large-keyspaces-when-about-right-is-good-enough/">The Count-min Sketch: How to Count Over Large Keyspaces When 'About Right' Is Good Enough</a>
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Phillip Flajolet, cientista do INRIA responsável pelo HyperLogLog.</li>
+          <li>LogLog, SuperLogLog.</li>
+          <li>Faleceu em 2011.</li>
+          <li>O artigo sobre o HyperLogLog vale a leitura (trás bons insights).</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Phillipe Flajolet <span style="font-size: 22pt">(∗1948 †2011)</span></h2>
+      <h3>O homem por trás do HyperLogLog.</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="images/flajolet_died.png" width="75%" height="75%"/>
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Um conceito natural, mas requer certa atenção para ser observado.</li>
+          <li>256 combinações diferentes. Fixando 0, cai pela metade: 50%.</li>
+          <li>Fixar segundo 0, cai pela metade de novo: 25%.</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>HyperLogLog</h2>
+      <h3>Distribuição de bits no hash</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="svg/hll_perc.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Mudar para frações para facilitar essa visualização.</li>
+          <li>1/8 significa que 1 em cada 8 hashes começam com 000.</li>
+          <li>Meio que dá uma dica que depois de 7 hashes distintos, espero ver um que comece com 000.</li>
+          <li>Se vejo um hash que começa com 000 talvez signifique que a cardinalidade é 8.</li>
+          <li>Como obter 8: 2^3.</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>HyperLogLog</h2>
+      <h3>Distribuição de bits no hash</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="svg/hll_frac.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Com somente um fluxo, seu resultado estará errado.</li>
+          <li>Dividindo a amostra em vários fluxos diferentes e tirando a média, maior chance de estar certo.</li>
+          <li>Partição dos fluxos feita pelos log2m primeiros bits do hash.</li>
+          <li>Bits restantes para determinar quantos 0s tem no começo.</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>HyperLogLog</h2>
+      <h3>Uma ideia genial, estimando por baixo.</h3>
+    </hgroup>
+    <article>
+      <p>Escolhe-se $log_2 m$ bits do espaço de hash para corresponderem a $m$ subfluxos ($|M| = m$). A busca pelo prefixo é efetuada nos bits restantes.</p>
+      <p>Por exemplo, para $log_2 m = 3$ ($m = 8$):</p>
+      <div class="centered">
+        <img src="svg/hll_input.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Objetivo é manter para cada subfluxo o maior prefixo.</li>
+          <li>Este único inteiro servirá para estimar a cardinalidade deste subfluxo.</li>
+          <li>Então, depois de vários updates...</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>HyperLogLog</h2>
+      <h3>Atualizando o array $M$.</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="svg/hll_update.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Cada subfluxo terá um valor de prefixo máximo visto.</li>
+          <li>Num hashspace de 32bits, estes inteiros podem assumir valores entre 0 e 31.</li>
+          <li>Necessário apenas 5 bits para armazenar cada registrador</li>
+          <li>Por isso LogLog, até 2^32 elementos distintos com 5 bits por registrador</li>
+          <li>log2(log2(2^32)) = 5</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>HyperLogLog</h2>
+      <h3>Array $M$ depois de diversos updates.</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="svg/hll_update2.svg.png.png" class="old-svg" />
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>A estimativa para cada subfluxo. 2^tamanho do maior prefixo</li>
+          <li>Média. Mas não qualquer média. Média harmônica única com resultados relevantes.</li>
+          <li>Corrigir o bias multiplicativo (que sempre leva o valor pra cima)</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>HyperLogLog</h2>
+      <h3>Como estimar?</h3>
+    </hgroup>
+    <article class="build">
+      <div>      
+        <p>Estimativa de cada registrador:</p>
+        <p class="centered">$\hat{E}_i = 2^{M(i)}$</p>
+      </div>
+      <div>      
+        <p>Estimativa geral (média harmônica de todas as estimativas):</p>
+        <p class="centered">$\hat{E} = \frac{m^2}{\sum_{i=1}^{m} \hat{E}(i)^{-1}} = \frac{m^2}{\sum_{i=1}^{m} 2^{-M(i)}}$</p>
+      </div>
+      <div>      
+        <p>Estimativa geral (corrigindo o bias multiplicativo):</p>
+        <p class="centered">$\hat{E}' = \frac{\alpha_m m^2}{\sum_{i=1}^{m} 2^{-M(i)}}$, onde $\alpha_m = (m \int_0^{\infty} (log_2 (\frac{2+u}{1+u}))^m du)^{-1}$</p>
+      </div>
+
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Menos de 20 linhas de Python.</li>
+          <li>Em Java é um pouco mais.</li>
+          <li>Ignorando a otimização de apenas 5 bits por registrador</li>
+          <li>Mais uma vez, didática</li>
+        </ul>
+      </section>
+    </aside>    <hgroup>
+      <h2>HyperLogLog</h2>
+      <h3>Uma versão didática (em Python, claro)</h3>
+    </hgroup>
+    <article class="smaller">
+<pre class="prettyprint" data-lang="python">
+class HyperLogLog:
+    def __init__(self, log2m):
+        self.log2m = log2m
+        self.m = 1 << log2m
+        self.data = [0]*self.m
+        self.alphaMM = (0.7213 / (1 + 1.079 / self.m)) * self.m * self.m
+        
+    def add(self, element):
+        x = mmh3.hash(str(element), 0)
+        a, b = 32-self.log2m, self.log2m
+        i = x >> a
+        v = self._bitscan(x << b, a)       
+        self.data[i] = max(self.data[i], v)
+        
+    def cardinality(self):
+        estimate = self.alphaMM / sum([2**-v for v in self.data])
+        if estimate <= 2.5 * self.m:
+            zeros = float(self.data.count(0))
+            return round(-self.m * math.log(zeros / self.m))
+        else:
+            return round(estimate)
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Melhores algoritmos nos menores códigos</li>
+          <li>Algoritmos probabilísticos essenciais para computação em tempo real.</li>
+          <li>Academia já percebeu</li>
+          <li>E a indústria...</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Conclusão</h2>
+    </hgroup>
+    <article class="build">
+        <p>Os melhores algoritmos estão nos menores códigos...</p>
+        <p>... porém nos papers mais obscuros.</p>
+        <p>Estruturas de dados probabilisticas vão desempenhar um papel fundamental na evolução do Big Data.</p>
+        <p>A academia já percebeu isso e já está dez anos à frente.</p>
+        <p>A indústria ainda está engatinhando.</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Por falar em indústria...</h2>
+      <h3>Twitter Algebird</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="images/algebird.png" width="75%" height="75%"/>
+      </div>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Por falar em indústria...</h2>
+      <h3>ClearSpring (AddThis) stream-lib</h3>
+    </hgroup>
+    <article>
+      <div class="centered">
+        <img src="images/stream-lib.png" width="75%" height="75%"/>
+      </div>
+    </article>
+  </slide>
+
+  <slide class="logoslide dark nobackground">
+    <article class="flexbox vcenter centered">
+      <span><img src="images/intelie_logo_white.png"></span>
+      <p class="white" style="margin-bottom: 30px;">Estamos contratando!</p>
+      <a href="http://www.intelie.com.br/trabalhe" class="white" style="border-bottom:1px solid white">intelie.com.br/trabalhe</a>
+    </article>
+  </slide>
+
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/intelie_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>Dúvidas?</h2>
+      <p>Apresentação em <b><a href="http://juanlopes.net/qconsp2013">juanlopes.net/qconsp2013</a></b>.</p>
+      <p>Exemplos em <b><a href="https://github.com/juanplopes/sketches">github.com/juanplopes/sketches</a></b>.</p>
+      <p>Contato:</p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-5988212-2']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>

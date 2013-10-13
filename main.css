@@ -1,27 +1,24 @@
 body { 
     font-family: 'Open Sans', sans-serif; 
-    width: 1000px; 
+    max-width: 1000px;
+    padding: 0 20px;
     margin: auto;
-    color: #666;
 }
 
-h1, h2 {
-    font-weight: normal;
+div.indent {
+    padding-left: 50px;
 }
 
-h1 {
-    font-size: 40px;
+a.badge {
+    width: 200px;
+    height: 60px;
+    display: inline-block;
+    text-decoration: none;
+    vertical-align:middle
 }
 
-h2 {
-    font-size: 35px;
-}
-
-
-iframe.uva-badge { 
-    border: 0px; 
-    width: 200px; 
-    height: 60px; 
+.clear {
+    clear: both;
 }
 
 a {
@@ -47,10 +44,6 @@ a.nounderline, a img {
 
 a.uvastats {
     background-image: url(uva.png);
-    width: 200px;
-    height: 60px;
-    display: inline-table;
-    text-decoration: none;
 }
 
 a.uvastats:hover {

@@ -1,0 +1,114 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/2.3.5/highcharts.js"></script>
+<script src="closing.js"></script>
+<script src="volume.js"></script>
+
+<script>
+    Array.prototype.remove = function(from, to) {
+        var rest = this.slice((to || from) + 1 || this.length);
+        this.length = from < 0 ? this.length + from : from;
+        return this.push.apply(this, rest);
+    };
+
+    var dist = function(a, b, c, d) {
+        return Math.sqrt((a-b)*(a-b)+(c-d)*(c-d));
+    }
+    
+    var eDist = function(p1, p2, p3) {
+        return (dist(p1[0], p3[0], p1[1], p3[1]) + dist(p2[0], p3[0], p2[1], p3[1])) * (p2[0] - p1[0]);
+    }
+    
+    var vDist = function(p1, p2, p3) {
+        return Math.abs((p1[1] + (p2[1]-p1[1])*(p3[0]-p1[0])/(p2[0]-p1[0]) - p3[1])) * (p2[0] - p1[0]);
+    }
+
+    var pip = function(data, k, dist) {
+        var ret = [];
+        
+        for(var i=0; i<data.length; i++) {
+            ret.push(data[i]);
+            if (ret.length <= k)
+                continue;
+                
+            var miniv = Infinity;
+            var minij = 0;
+            for(var j=1; j<ret.length-1; j++) {
+                var d = dist(ret[j-1], ret[j+1], ret[j]);
+
+                if (d < miniv) {
+                    miniv = d;
+                    minij = j;
+                }
+            }    
+           
+            ret.remove(minij);    
+        }
+        return ret;
+    }
+
+    var plot = function(where, closing, volume) {
+        new Highcharts.Chart({
+            chart: {
+                renderTo: where,
+                type: 'line',
+                height: 280
+            },
+            plotOptions: {
+                series: {
+                    marker: {
+                        enabled: false
+                    }
+                }
+            },
+            title: {
+                text: where
+            },
+            series: [
+                { name: 'Volume', data: volume, yAxis: 1 },
+                { name: 'Closing', data: closing, yAxis: 0 },
+            ],
+            yAxis: [
+                {
+                    lineWidth: 1,
+                    title: {
+                        text: 'Closing'
+                    }
+                }, {
+                    lineWidth: 1,
+                    opposite: true,
+                    title: {
+                        text: 'Volume'
+                    }
+                }
+            ]
+        });
+    }
+
+    var prepare = function(rawData) {
+        var data = [];
+        for(var i=0; i<rawData.length; i++) {
+            data.push([i, rawData[i]])
+        }
+        return data;
+    }
+
+    $(document).ready(function() {
+        var closing = prepare(closingData);
+        var volume = prepare(volumeData);
+        plot('full', closing, volume);
+        plot('pip_vertical', pip(closing, 400, vDist), pip(volume, 400, vDist));
+        plot('pip_euclidean', pip(closing, 400, eDist), pip(volume, 400, eDist));
+    });
+</script>
+
+<h1>Google Stock Prices</h1>
+
+<div id="full">
+</div>
+<div id="pip_vertical">
+</div>
+<div id="pip_euclidean">
+</div>
+
+
+
