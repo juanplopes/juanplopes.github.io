@@ -1,15 +1,29 @@
-@import url(http://fonts.googleapis.com/css?family=Lusitana:400,700);
-
-body { 
-    font-family: 'Lusitana', serif; 
-    max-width: 1000px;
-    padding: 0 20px;
-    margin: auto;
-    font-size: 115%;
+@font-face {
+	font-family: "CMU";
+	src: url("fonts/cmunrm.ttf");
 }
 
-div.indent {
-    padding-left: 50px;
+h1, h2, h3 {
+    font-weight: normal;   
+}
+
+div.center {
+    text-align: center;
+}
+
+body { 
+    font-family: 'CMU', sans-serif; 
+    max-width: 900px;
+    padding: 0 20px;
+    margin: auto;
+}
+
+p {
+    text-indent: 40px;
+}
+
+ul.items li {
+    margin: 0.5em 0;
 }
 
 a.badge {
