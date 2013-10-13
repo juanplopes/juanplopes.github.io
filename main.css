@@ -1,12 +1,11 @@
 body { 
-    font-family: 'Quicksand', sans-serif; 
+    font-family: 'Open Sans', sans-serif; 
     width: 1000px; 
     margin: auto;
     color: #666;
 }
 
 h1, h2 {
-    letter-spacing:0.15em;
     font-weight: normal;
 }
 
