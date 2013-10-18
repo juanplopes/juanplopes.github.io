@@ -18,7 +18,7 @@ body {
     margin: auto;
 }
 
-p {
+p.indent {
     text-indent: 40px;
 }
 
