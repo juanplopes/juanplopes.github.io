@@ -1,53 +1,90 @@
-\documentclass[a4paper,12pt,notitlepage]{article}
+\documentclass[a4paper,12pt,oneside]{article}
+\usepackage{units}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc} 
+\usepackage{a4wide}
+
+\pagenumbering{gobble}
+
+\hypersetup{%
+  colorlinks=true,% hyperlinks will be black
+  linkcolor=blue,% hyperlink borders will be red
+  urlcolor=blue,% hyperlink borders will be red
+  linkbordercolor=blue,% hyperlink borders will be red
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+
 \begin{document}
-\title{Hi, I'm Juan Lopes}
 \author{Juan Lopes}
-\renewcommand{\abstractname}{}
 
-\maketitle
-
-\begin{abstract}
 \begin{center}
-A geek programmer, in love with code since I was given my first computer.
-I also like serif fonts.
+	{\huge Hi, I'm Juan Lopes} \\[0.5cm]
+
+	{\large \today}
+\end{center}
+
+
+\renewcommand{\abstractname}{}
+\begin{abstract}
+\noindent \begin{center}
+Brazilian, lives in Rio de Janeiro. \\
+Interested in algorithms, optimization, programming contests and serif typefaces. \\
+B.S. in Computer Science; M.S. candidate in Computer Science. \\
+Writes high-performance Java code at \textit{Intelie} for the last 2 \nicefrac{1}{2} years. \\
+Wrote beaufitul C\# code at \textit{Living Consultoria} for almost 4 years before.
 \end{center}
 \end{abstract}
 
 
-\section{What I do?}
+\section*{What excites me?}
 
 	I love code in all its forms. Love writing and love reading. I'm a programmer since I was 9, when discovered that QBasic used to come with Windows 95. 
 	
-	As a good programmer, I like participating in programming contests. I attended to the last five editions of \textbf{ICPC} (2007 to 2011), being south-american finalist in four of them.
+	During the undergrad years, I had the chance to expand my interest in \textbf{algorithms}. There I was introduced to \textbf{programming contests}. I attended to six editions of \textbf{ICPC} (2007 to 2012), being \textbf{south-american finalist} in five of them. Also in the 2013 edition of the \textbf{IEEEXtreme} contest, my team and I won the \textbf{1st place in Brazil} [\ref{url:ieeextreme}].
 	
-	Nowadays I write programs professionally. Some companies say I am a MCTS and PSD. Not that I care about those titles, but some people seem to like it. Personally, I value much more writing actual code than any title.
+	I like \textbf{Coding Dojos} a lot. Here in Rio, I help to organize the DojoRio [\ref{url:dojorio}] meetings. We probably have the most active Brazilian dojo community. As of today, there were \textbf{almost 250 sessions} (once a week, every wednesday). I think Coding Dojos are a great oportunity to try new languages, new problems and talk to great programmers.
 	
-	I participate in \textbf{Coding Dojos} with regular frequency. It is a great oportunity to try new languages, new problems and talk to great programmers.
+	Recently, as a part of my work at \emph{Intelie}, I've been studying (and coding) a lot about \textbf{time-series analysis} and \textbf{real-time optimized algorithms}. As a result, I've been giving talks about it, from which I highlight the latest about \textbf{probabilistic data structures} at QCon São Paulo 2013 [\ref{url:qconsp2013}].
 	
-	I am also an eventual writer for .Net Magazine (a brazilian publication about Microsoft technologies). It's a mainstream publication, but I like to write about the \textbf{ALT.NET} side of the .Net technologies.
+	Last, but not least, as every passionate programmer, I write code for fun in my free time. You can see most of the recent works in my \textbf{GitHub} [\href{http://github.com/juanplopes}{juanplopes}]. Actually, it says more about me than any of these words.
 	
-	Last, but not least, you can see most of the recent codes I wrote at my github (\textbf{github.com/juanplopes}). Actually, it says more about me than any of these words.
-	
-\section{Where did I work?}
+\section*{Where did I work?}
 
-	My current position is at \textbf{Intelie}, a company focused in building tools for operation intelligence. I am now writing \textbf{Java} code more than usual, actually liking it. It's a good company to practice writing code that analyzes lots of data. Learning to improve code performance is a must there. I am now a big fan of JVM because of this experience. I am working there since \textbf{August 2011}.
-	
-	Before that, I worked at \textbf{Living Consultoria}. Worked there from \textbf{December 2007 to July 2011}. I was a \textbf{lead developer} playing as architect. The focus of the company are .Net Technologies, so I spent most of my time writing \textbf{C\#}, but I've worked with \textbf{Ruby} (on and off Rails) and some \textbf{PHP} too. 
-	
-	There, I developed a framework (\textbf{github.com/juanplopes/simple}) that is used in almost every project in the company. Today I'm not a \emph{framework guy} anymore, but it was a good experience creating it. 
-	
-	I played a major role implementing the first projects using \textbf{Scrum} in the company; participated in some \textbf{international projects}, collaborating with teams from many countries. Traveled to \textbf{Amsterdam} a couple of times, because of this.
-	
-	Worked also 9 months at \textbf{Biologica Sistemas}. Was a great experience developing \textbf{biometric systems}. There was lots of Java and \textbf{C++}, but also a little C\#. Most of the customers were public companies. It was a good lab to improve my \textbf{math skills}. There, I met most of the people who motivated me into competing at ICPC.
+\subsection*{Intelie \small{ (August 2011 -- Now)}}
 
-\section{Where did I study?}
-
-	I have studied at \textbf{UERJ} (en: \emph{Rio de Janeiro State University}) since 2006. It is one of the largest Brazilian universities. I have already completed all the regular course, but still trying to acquire the degree of \textbf{Bachelor in Computer Science}. Writing the monograph. Some say it's only an excuse to still compete at ICPC. But it's obviously gossip.
-
-\section{How to find me?}
-
-	As a true geek, I like smartphones. Android, mostly. So I will almost always have my phone with me, You can call me at \textbf{(+55 21) 9317 4772}.
+	I currently work at \textbf{Intelie}, a company focused in building tools for operation intelligence. There I write a lot of \textbf{Java} code. As a former C\# programmer, I'm surprisingly liking it.
 	
-	I also have an email account. It’s probably the best way to find me. You can mail me at \textbf{me@juanlopes.net}.
+	Most systems I write today use heavy backend algorithms to analyze real-time data streams at a rate of a \textbf{few terabytes per day}. Most of it would be impossible if we didn't use \textbf{distributed algorithms}. 
+	
+	There I also had a very particular experience with \textbf{Lucene}, adapting it's core to support indexing tens of billions of log messages per Lucene index, with sub-second distributed query, for the largest brazilian media group.
+
+\subsection*{Living Consultoria \small{ (December 2007 -- July 2011)}}
+
+	At \textbf{Living Consultoria} I was a mix of \textbf{lead developer} and \textbf{architect}. The focus of the company was Microsoft technologies, so I spent most of my time writing \textbf{C\#}, but I also worked with \textbf{Ruby} (on and off Rails) and some \textbf{PHP}. There I played a major role implementing the first projects using \textbf{Scrum} in the company (back in 2008, when it was still cool); participated in some \textbf{international projects}, collaborating with teams from many countries. Traveled to Amsterdam a couple of times, because of this.
+
+\section*{Where did I study?}
+
+	Today I'm a \textbf{Master's candidate} in \textbf{Computer Science} at \textbf{UERJ} (en: \emph{Rio de Janeiro State University}). It is one of the largest Brazilian universities. Given my current expecience, my dissertation will probably be abou \textbf{distributed stream processing algorithms}.
+
+	I also have acquired my Bachelor's degree in Computer Science at \textbf{UERJ} also. Finished in 2013. Actually I finished the regular course in 2009, but stayed there to be able to compete in the ICPC. I graduated with an essay about \textbf{polynomial-time regular expressions implementations} [\ref{url:pyrex}].
+
+\section*{How to find me?}
+
+	As a true geek, I like smartphones. Android, mostly. So I will almost always have my phone with me, You can call me at \textbf{(+55) 21 99317 4772}.
+	
+	Probably the best way to find me is my e-mail [\href{mailto:me@juanlopes.net}{me@juanlopes.net}]. I'm also pretty active on Twitter [\href{http://twitter.com/juanplopes}{@juanplopes}].
+
+\section*{Links}
+
+	Some links are in portuguese.
+
+\begin{enumerate}
+
+  \item \label{url:ieeextreme} \href{http://www.ieee.org/membership_services/membership/students/competitions/xtreme/xtreme7_final_rankings-country.pdf}{IEEEXtreme 7.0 results by country}
+  \item \label{url:dojorio} \href{http://dojorio.org/}{DojoRio.org}
+  \item \label{url:qconsp2013} \href{http://www.infoq.com/br/presentations/analisando-fluxo-dados-tempo-real}{QCon São Paulo 2013: Analyzing and Reducing Big Data Streams in Real-Time}
+  \item \label{url:pyrex} \href{http://github.com/juanplopes/pyrex}{github.com/juanplopes/pyrex}
+\end{enumerate}
 
 \end{document}
