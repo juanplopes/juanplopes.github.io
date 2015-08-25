@@ -4,15 +4,15 @@
 }
 
 h1, h2, h3 {
-    font-weight: normal;   
+    font-weight: normal;
 }
 
 div.center {
     text-align: center;
 }
 
-body { 
-    font-family: 'CMU', sans-serif; 
+body {
+    font-family: 'CMU', sans-serif;
     max-width: 900px;
     padding: 0 20px;
     margin: auto;
@@ -27,7 +27,7 @@ ul.items li {
 }
 
 a.badge {
-    width: 200px;
+    min-width: 200px;
     height: 60px;
     display: inline-block;
     text-decoration: none;
@@ -70,7 +70,7 @@ a.uvastats span.stats {
     -moz-text-shadow: 0 0 4px #fff;
     -webkit-text-shadow: 0 0 4px #fff;
     color: white;
-    font-family: 'Verdana', sans-serif; 
+    font-family: 'Verdana', sans-serif;
     padding-top: 10px;
     padding-right: 10px;
     text-align: right;
