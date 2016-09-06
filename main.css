@@ -8,6 +8,10 @@ h1, h2, h3 {
     font-weight: normal;
 }
 
+.back {
+    margin-top: -17px;
+}
+
 div.center {
     text-align: center;
 }
