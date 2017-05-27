@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/juanplopes
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://juanlopes.net
+  * I am juanplopes (https://keybase.io/juanplopes) on keybase.
+  * I have a public key ASAbnYPzQC3kur2g1skku3Eodfvw_egjtxXfetmlGRTC-wo
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01201b9d83f3402de4babda0d6c924bb712875fbf0fde823b715df7ad9a51914c2fb0a",
+            "host": "keybase.io",
+            "kid": "01201b9d83f3402de4babda0d6c924bb712875fbf0fde823b715df7ad9a51914c2fb0a",
+            "uid": "b6a294f34006e055f4412da732644519",
+            "username": "juanplopes"
+        },
+        "merkle_root": {
+            "ctime": 1495845317,
+            "hash": "cb38adbd0303fd50c203f8a66f1989626ac5d9cf0798701eb340e42765581d7d5fde4d82ae86f1040b17f8ef61900c0489257568360f74da2ec0956b409c5218",
+            "hash_meta": "8c39f585e40619a29fc80ff95fcc46b8863ca589266ee0878ea990ecd9213330",
+            "seqno": 1118834
+        },
+        "service": {
+            "hostname": "juanlopes.net",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.24"
+    },
+    "ctime": 1495845333,
+    "expire_in": 504576000,
+    "prev": "42481fb5743ae6f6f03df84b3c69f8765f6376e6d2b97202ddc1778b1288589c",
+    "seqno": 7,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgG52D80At5Lq9oNbJJLtxKHX78P3oI7cV33rZpRkUwvsKp3BheWxvYWTFA0Z7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwMWI5ZDgzZjM0MDJkZTRiYWJkYTBkNmM5MjRiYjcxMjg3NWZiZjBmZGU4MjNiNzE1ZGY3YWQ5YTUxOTE0YzJmYjBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwMWI5ZDgzZjM0MDJkZTRiYWJkYTBkNmM5MjRiYjcxMjg3NWZiZjBmZGU4MjNiNzE1ZGY3YWQ5YTUxOTE0YzJmYjBhIiwidWlkIjoiYjZhMjk0ZjM0MDA2ZTA1NWY0NDEyZGE3MzI2NDQ1MTkiLCJ1c2VybmFtZSI6Imp1YW5wbG9wZXMifSwibWVya2xlX3Jvb3QiOnsiY3RpbWUiOjE0OTU4NDUzMTcsImhhc2giOiJjYjM4YWRiZDAzMDNmZDUwYzIwM2Y4YTY2ZjE5ODk2MjZhYzVkOWNmMDc5ODcwMWViMzQwZTQyNzY1NTgxZDdkNWZkZTRkODJhZTg2ZjEwNDBiMTdmOGVmNjE5MDBjMDQ4OTI1NzU2ODM2MGY3NGRhMmVjMDk1NmI0MDljNTIxOCIsImhhc2hfbWV0YSI6IjhjMzlmNTg1ZTQwNjE5YTI5ZmM4MGZmOTVmY2M0NmI4ODYzY2E1ODkyNjZlZTA4NzhlYTk5MGVjZDkyMTMzMzAiLCJzZXFubyI6MTExODgzNH0sInNlcnZpY2UiOnsiaG9zdG5hbWUiOiJqdWFubG9wZXMubmV0IiwicHJvdG9jb2wiOiJodHRwOiJ9LCJ0eXBlIjoid2ViX3NlcnZpY2VfYmluZGluZyIsInZlcnNpb24iOjF9LCJjbGllbnQiOnsibmFtZSI6ImtleWJhc2UuaW8gZ28gY2xpZW50IiwidmVyc2lvbiI6IjEuMC4yNCJ9LCJjdGltZSI6MTQ5NTg0NTMzMywiZXhwaXJlX2luIjo1MDQ1NzYwMDAsInByZXYiOiI0MjQ4MWZiNTc0M2FlNmY2ZjAzZGY4NGIzYzY5Zjg3NjVmNjM3NmU2ZDJiOTcyMDJkZGMxNzc4YjEyODg1ODljIiwic2Vxbm8iOjcsInRhZyI6InNpZ25hdHVyZSJ9o3NpZ8RAjV3BCCfxkr8CQ8JW9snzPz/1dW1EZp0KPs80uT351pqPk96mImZ53ZFo5KCPyJFrtpoEjQ2s94p9l3PIDmgMB6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIPSz18aYQQ2uPdOB71Efd+Ny4BI1K5ALZNz0ORwHlCM0o3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/juanplopes
+
+==================================================================
